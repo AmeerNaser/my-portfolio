@@ -1,103 +1,168 @@
-import Image from "next/image";
+// src/app/page.tsx
+type Project = {
+  title: string;
+  description: string;
+  code?: string;   // GitHub link
+  docs?: string;   // docs page / PDF
+  video?: string;  // demo video
+  tags?: string[];
+};
+
+const projects: Project[] = [
+  {
+    title: "UWB Indoor Localization",
+    description: "DW3000 anchors + tags, ToF/TDoA, live 2D/3D map; < 20 cm median error.",
+    code: "https://github.com/you/uwb-rtls",
+    docs: "/docs/uwb-rtls.html",
+    video: "/media/uwb-demo.mp4",
+    tags: ["RF", "Embedded", "Fusion"],
+  },
+  {
+    title: "SDR OFDM Link",
+    description: "GNU Radio baseband + embedded front-end; adaptive MCS with BER plots.",
+    code: "https://github.com/you/sdr-link",
+    docs: "/docs/sdr-link.html",
+    tags: ["DSP", "Comms"],
+  },
+  {
+    title: "Digital Power / FOC Drive",
+    description: "C2000 closed-loop control; efficiency & transient KPIs with PyVISA sweeps.",
+    code: "https://github.com/you/digital-power",
+    tags: ["Power", "Control"],
+  },
+  {
+    title: "FPGA DDR3 Pipeline",
+    description: "MIG DDR3 + AXI stream; throughput/latency report @ 1080p60.",
+    code: "https://github.com/you/fpga-ddr-pipe",
+    tags: ["FPGA", "High-Speed"],
+  },
+  {
+    title: "Edge-AI Vision Sorter",
+    description: "Jetson + OAK-D; part/defect detection → actuator; end-to-end latency logged.",
+    code: "https://github.com/you/edge-vision-sorter",
+    tags: ["AI/CV", "Robotics"],
+  },
+  {
+    title: "Automated Test Bench",
+    description: "SCPI + PyVISA orchestration; repeatable sweeps with plots & CSV artifacts.",
+    code: "https://github.com/you/auto-test-bench",
+    tags: ["Test", "CI"],
+  },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-dvh bg-[var(--background)] text-[var(--foreground)]">
+      {/* HEADER / NAV */}
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between p-4">
+          <a href="/" className="text-lg font-semibold">YourName</a>
+          <div className="space-x-6 text-sm">
+            <a href="#projects" className="hover:text-[--color-brand]">Projects</a>
+            <a href="#about" className="hover:text-[--color-brand]">About</a>
+            <a href="#contact" className="hover:text-[--color-brand]">Contact</a>
+          </div>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* HERO */}
+      <section className="mx-auto grid max-w-6xl gap-6 px-4 py-16 lg:grid-cols-2">
+        <div>
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+            Electrical Engineer • Embedded • Power • RF
+          </h1>
+          <p className="mt-4 text-lg text-[--color-muted]">
+            I build industry-grade systems: power converters, UWB, SDR, robotics, FPGA, and test automation.
+          </p>
+          <div className="mt-6 space-x-3">
+            <a
+              href="#projects"
+              className="inline-block rounded-[--radius-card] border px-5 py-3 hover:bg-black/5"
+            >
+              See Projects
+            </a>
+            <a
+              href="/resume.pdf"
+              className="inline-block rounded-[--radius-card] bg-[--color-brand] px-5 py-3 text-white hover:bg-[--color-brand-600]"
+            >
+              Download CV
+            </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="aspect-video rounded-[--radius-card] border border-black/10 bg-black/5" />
+      </section>
+
+      {/* PROJECTS GRID */}
+      <section id="projects" className="mx-auto max-w-6xl px-4 pb-20">
+        <h2 className="mb-6 text-2xl font-semibold">Featured Projects</h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((p) => (
+            <article
+              key={p.title}
+              className="rounded-[--radius-card] border border-black/10 p-4 shadow-sm transition-transform hover:-translate-y-0.5"
+            >
+              <h3 className="text-lg font-semibold">{p.title}</h3>
+              <p className="mt-2 text-sm text-[--color-muted]">{p.description}</p>
+
+              {p.tags && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span key={t} className="rounded-full border px-2 py-0.5 text-xs text-[--color-muted]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-3 flex gap-3 text-sm">
+                {p.code && <a className="underline hover:text-[--color-brand]" href={p.code}>Code</a>}
+                {p.docs && <a className="underline hover:text-[--color-brand]" href={p.docs}>Docs</a>}
+                {p.video && <a className="underline hover:text-[--color-brand]" href={p.video}>Video</a>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      {/* ABOUT */}
+<section id="about" className="mx-auto max-w-6xl px-4 pb-20">
+  <h2 className="mb-4 text-2xl font-semibold">About</h2>
+  <p className="max-w-3xl text-[--color-muted]">
+    I’m an Electrical Engineer focused on embedded systems, power electronics, RF/communications,
+    robotics/AI, and FPGA. I build end-to-end systems and document performance with repeatable tests.
+  </p>
+  <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+    <li className="rounded-[--radius-card] border border-black/10 p-3">Embedded & RTOS</li>
+    <li className="rounded-[--radius-card] border border-black/10 p-3">Power & Control (C2000)</li>
+    <li className="rounded-[--radius-card] border border-black/10 p-3">RF / SDR / UWB</li>
+    <li className="rounded-[--radius-card] border border-black/10 p-3">FPGA (AXI/MIG)</li>
+    <li className="rounded-[--radius-card] border border-black/10 p-3">Robotics (ROS 2)</li>
+    <li className="rounded-[--radius-card] border border-black/10 p-3">Test Automation (SCPI/PyVISA)</li>
+  </ul>
+</section>
+
+{/* CONTACT */}
+<section id="contact" className="mx-auto max-w-6xl px-4 pb-24">
+  <h2 className="mb-4 text-2xl font-semibold">Contact</h2>
+  <p className="max-w-3xl text-[--color-muted]">
+    The fastest way to reach me is email. I’ll add a proper contact form later.
+  </p>
+
+  {/* simple mailto button for now */}
+  <a
+    href="mailto:your.name@email.com"
+    className="mt-4 inline-block rounded-[--radius-card] bg-[--color-brand] px-5 py-3 text-white hover:bg-[--color-brand-600]"
+  >
+    Email me
+  </a>
+
+  {/* (optional) form skeleton – not wired yet */}
+  {/* <form className="mt-6 max-w-xl space-y-3">
+    <input className="w-full rounded-[--radius-card] border p-3" placeholder="Your email" />
+    <textarea className="w-full rounded-[--radius-card] border p-3" rows={5} placeholder="Message" />
+    <button className="rounded-[--radius-card] bg-[--color-brand] px-5 py-3 text-white hover:bg-[--color-brand-600]">Send</button>
+  </form> */}
+</section>
+
+    </main>
   );
 }
