@@ -33,3 +33,12 @@ body {
   border-top: 6px solid var(--color-brand); /* <-- temporary visual check */
 }
 
+/* project card image hover effect */
+.card-img {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.card-img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
